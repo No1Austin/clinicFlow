@@ -5,45 +5,39 @@ const appointmentSchema = new mongoose.Schema(
     patientName: {
       type: String,
       required: true,
-      trim: true
     },
-
     patientEmail: {
       type: String,
       required: true,
-      trim: true,
-      lowercase: true
     },
-
     patientPhone: {
       type: String,
-      trim: true
     },
-
     appointmentDate: {
       type: Date,
-      required: true
+      required: true,
     },
-
     reason: {
       type: String,
-      trim: true
     },
-
     status: {
       type: String,
-      enum: ["pending", "confirmed", "cancelled", "reschedule_requested"],
-      default: "pending"
+      enum: ["pending", "confirmed", "cancelled"],
+      default: "pending",
     },
+
+    reminderSent: {
+  type: Boolean,
+  default: false,
+},
 
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
-    }
+      ref: "User",
+      required: true,
+    },
   },
-  {
-    timestamps: true
-  }
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("Appointment", appointmentSchema);

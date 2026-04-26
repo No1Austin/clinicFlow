@@ -2,6 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
+const startReminderJob = require("./jobs/reminderJob");
+const userRoutes = require("./routes/userRoutes");
+
 
 dotenv.config();
 connectDB();
@@ -17,9 +20,11 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/appointments", require("./routes/appointmentRoutes"));
+app.use("/api/users", userRoutes);
 
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  startReminderJob();
 });
