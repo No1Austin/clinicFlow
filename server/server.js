@@ -16,7 +16,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://https://clinic-flow-black-beta.vercel.app/",
+      "https://clinic-flow-black-beta.vercel.app",
     ],
     credentials: true,
   })
